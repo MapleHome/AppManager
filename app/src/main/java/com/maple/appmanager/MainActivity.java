@@ -1,6 +1,7 @@
 package com.maple.appmanager;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -30,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
 //         etCMD = findViewById(R.id.et_cmd);
 
         clickRefresh(null);
+
+        Toast.makeText(this, "哈哈，我成功启动了！", Toast.LENGTH_LONG).show();
+        Log.e("AutoRun","哈哈，我成功启动了！");
 
         updateButtonState();
     }

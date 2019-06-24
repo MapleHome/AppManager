@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.maple.appmanager">
+    package="com.maple.appmanager"
+    android:installLocation="internalOnly">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!--<uses-permission android:name="android.permission.ACCESS_CHECKIN_PROPERTIES" />-->
     <!--<uses-permission android:name="android.permission.FACTORY_TEST" />-->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
 
     <application
@@ -22,6 +24,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver
+            android:name=".MyReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter android:priority="1000">
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
