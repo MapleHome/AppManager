@@ -1,77 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        android:id="@+id/tv_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:padding="20dp"
-        android:text=" " />
-
-    <!--<Button-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:onClick="clickRefresh"-->
-    <!--android:padding="20dp"-->
-    <!--android:text="获取系统信息" />-->
-
-    <Button
-        android:id="@+id/bt_remove"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="clickRemoveApp"
-        android:padding="20dp"
-        android:text="一键删除" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/bt_add"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="clickAddApp"
-        android:padding="20dp"
-        android:text="一键恢复" />
+        <TextView
+            android:id="@+id/tv_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="20dp"
+            android:text=" " />
 
-    <CheckBox
-        android:id="@+id/cb_start_app"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:text="开机启动当贝市场" />
+        <Button
+            android:id="@+id/bt_remove"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="clickRemoveApp"
+            android:padding="20dp"
+            android:text="一键删除" />
 
+        <Button
+            android:id="@+id/bt_add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="clickAddApp"
+            android:padding="20dp"
+            android:text="一键恢复" />
 
-    <!--<EditText-->
-    <!--android:id="@+id/et_cmd"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:background="#abc"-->
-    <!--android:hint="输入命令，点击执行。。。"-->
-    <!--android:padding="10dp" />-->
+        <CheckBox
+            android:id="@+id/cb_start_app"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:text="开机启动当贝市场" />
 
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:gravity="center">-->
+    </LinearLayout>
 
-    <!--&lt;!&ndash;<Button&ndash;&gt;-->
-    <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:layout_gravity="center"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:onClick="clickExe1"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:text="执行1" />&ndash;&gt;-->
-
-    <!--<Button-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_gravity="center"-->
-    <!--android:onClick="clickExe2"-->
-    <!--android:text="执行2" />-->
-
-    <!--</LinearLayout>-->
-
-
-</LinearLayout>
+</layout>

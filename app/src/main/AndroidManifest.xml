@@ -4,10 +4,7 @@
     android:installLocation="internalOnly">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!--<uses-permission android:name="android.permission.ACCESS_CHECKIN_PROPERTIES" />-->
-    <!--<uses-permission android:name="android.permission.FACTORY_TEST" />-->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-
 
     <application
         android:name=".ManagerApp"

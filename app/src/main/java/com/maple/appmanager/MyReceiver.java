@@ -13,8 +13,8 @@ import android.content.Intent;
 public class MyReceiver extends BroadcastReceiver {
 
     public MyReceiver() {
+        super();
     }
-
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -24,6 +24,5 @@ public class MyReceiver extends BroadcastReceiver {
             context.startActivity(i);
         }
     }
-
 
 }

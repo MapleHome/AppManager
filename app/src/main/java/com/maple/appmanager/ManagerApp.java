@@ -3,7 +3,6 @@ package com.maple.appmanager;
 import android.app.Application;
 
 /**
- *
  * @author maple
  * @time 2019-06-24
  */

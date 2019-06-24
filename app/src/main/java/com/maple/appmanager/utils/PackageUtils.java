@@ -1,4 +1,4 @@
-package com.maple.appmanager;
+package com.maple.appmanager.utils;
 
 import android.content.Context;
 import android.content.Intent;

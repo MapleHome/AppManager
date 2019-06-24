@@ -1,4 +1,4 @@
-package com.maple.appmanager;
+package com.maple.appmanager.utils;
 
 import android.util.Log;
 

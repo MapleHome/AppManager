@@ -5,15 +5,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
+import com.maple.appmanager.databinding.ActivityMainBinding;
+import com.maple.appmanager.utils.PackageUtils;
 import com.maple.appmanager.utils.SPUtils;
+import com.maple.appmanager.utils.VirtualTerminal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,36 +22,25 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     public String AAA = "isStart";
-    TextView tvInfo;
-    Button btRemove;
-    Button btAdd;
-    CheckBox cbStart;
-    // EditText etCMD;
+    ActivityMainBinding binding;
     boolean canRemove = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        tvInfo = findViewById(R.id.tv_info);
-        btRemove = findViewById(R.id.bt_remove);
-        btAdd = findViewById(R.id.bt_add);
-        // etCMD = findViewById(R.id.et_cmd);
-        cbStart = findViewById(R.id.cb_start_app);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
         clickRefresh(null);
         updateButtonState();
 
-
         // start other app
         boolean isStart = new SPUtils().getBoolean(AAA, false);
-        cbStart.setChecked(isStart);
+        binding.cbStartApp.setChecked(isStart);
         if (isStart) {
             doStartAppWithPackageName("com.example.androidx.viewpager2");
         }
-
-        cbStart.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        binding.cbStartApp.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 new SPUtils().put(AAA, isChecked);
@@ -65,13 +55,13 @@ public class MainActivity extends AppCompatActivity {
             intent.addCategory(Intent.CATEGORY_LAUNCHER);
             intent.setComponent(new ComponentName(packageName, className));
             startActivity(intent);
-            finish();
+//            finish();
         }
     }
 
     private void updateButtonState() {
-        btRemove.setEnabled(canRemove);
-        btAdd.setEnabled(!canRemove);
+        binding.btRemove.setEnabled(canRemove);
+        binding.btAdd.setEnabled(!canRemove);
     }
 
     public void clickRefresh(View view) {
@@ -79,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 + "Model: " + android.os.Build.MODEL + ",\n"
                 + "SDK: " + android.os.Build.VERSION.SDK + ",\n"
                 + "版本：" + android.os.Build.VERSION.RELEASE;
-        tvInfo.setText(info);
+        binding.tvInfo.setText(info);
     }
 
     String[] appNames = {"LeSo", "LeSports", "LeStore", "LeVideo", "StvGallery", "StvWeather"};
@@ -152,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
             log += "Exception: " + e.getMessage() + "\n";
         }
         log += "总耗时: " + (System.currentTimeMillis() - startTime) + "ms \n";
-        tvInfo.setText(log);
+        binding.tvInfo.setText(log);
         return retAll;
     }
 
@@ -160,47 +150,4 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
-//    /**
-//     * run custom cmd
-//     *
-//     * @param view
-//     */
-//    public void clickExe2(View view) {
-//        String cmd = etCMD.getText().toString().trim();
-//        exeCommands(Arrays.asList(cmd));
-//    }
-
-    //---------------------------------------------------------------------
-
-//    public void clickExe1(View view) {
-//        String cmd = etCMD.getText().toString().trim();
-//        exeCmd(cmd);
-//    }
-//
-//    @Deprecated
-//    public void exeCmd(String cmd) {
-//        String s = "";
-//        try {
-//            Process p = Runtime.getRuntime().exec(cmd);
-//            BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-//            p.waitFor();
-//            if (p.exitValue() != 0) {
-//                //说明命令执行失败
-//                //可以进入到错误处理步骤中
-//            }
-//            String line = null;
-//            while ((line = reader.readLine()) != null) {
-//                System.out.println(line);
-//                s += line + "\n";
-//            }
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//            s += "InterruptedException: " + e.toString() + "\n";
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            s += "IOException: " + e.toString() + "\n";
-//        }
-//        s += "time: " + System.currentTimeMillis() + "\n";
-//        tvInfo.setText(s);
-//    }
 }
