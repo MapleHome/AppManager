@@ -18,7 +18,6 @@
             android:id="@+id/bt_remove"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="clickRemoveApp"
             android:padding="20dp"
             android:text="一键删除" />
 
@@ -26,7 +25,6 @@
             android:id="@+id/bt_add"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="clickAddApp"
             android:padding="20dp"
             android:text="一键恢复" />
 

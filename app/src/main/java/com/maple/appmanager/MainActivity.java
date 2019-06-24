@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,9 +20,15 @@ import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
-    public String AAA = "isStart";
-    ActivityMainBinding binding;
-    boolean canRemove = true;
+    public static final String START_TAG = "isStart";
+    private ActivityMainBinding binding;
+    private boolean canRemove = true;
+
+    // Config info
+    String[] appNames = {"LeSo", "LeSports", "LeStore", "LeVideo",
+            "StvGallery", "StvWeather"};
+    String startAppID = "com.example.androidx.viewpager2";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,17 +40,24 @@ public class MainActivity extends AppCompatActivity {
         updateButtonState();
 
         // start other app
-        boolean isStart = new SPUtils().getBoolean(AAA, false);
+        boolean isStart = new SPUtils().getBoolean(START_TAG, false);
         binding.cbStartApp.setChecked(isStart);
         if (isStart) {
-            doStartAppWithPackageName("com.example.androidx.viewpager2");
+            doStartAppWithPackageName(startAppID);
         }
-        binding.cbStartApp.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                new SPUtils().put(AAA, isChecked);
-            }
-        });
+        initListener();
+    }
+
+    private void initListener() {
+        binding.btRemove.setOnClickListener(v ->
+                removeSingleApp(appNames)
+        );
+        binding.btAdd.setOnClickListener(v ->
+                addSingleApp(appNames)
+        );
+        binding.cbStartApp.setOnCheckedChangeListener((buttonView, isChecked) ->
+                new SPUtils().put(START_TAG, isChecked)
+        );
     }
 
     private void doStartAppWithPackageName(String packageName) {
@@ -72,15 +84,6 @@ public class MainActivity extends AppCompatActivity {
         binding.tvInfo.setText(info);
     }
 
-    String[] appNames = {"LeSo", "LeSports", "LeStore", "LeVideo", "StvGallery", "StvWeather"};
-
-    public void clickAddApp(View view) {
-        addSingleApp(appNames);
-    }
-
-    public void clickRemoveApp(View view) {
-        removeSingleApp(appNames);
-    }
 
     public void addSingleApp(String... appNames) {
         List<String> cmdList = new ArrayList<>();
