@@ -1,18 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:orientation="vertical">
 
     <TextView
+        android:id="@+id/tv_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_gravity="center"
+        android:padding="20dp"
+        android:text=" " />
 
-</android.support.constraint.ConstraintLayout>
+    <!--<Button-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:onClick="clickRefresh"-->
+    <!--android:padding="20dp"-->
+    <!--android:text="获取系统信息" />-->
+
+    <Button
+        android:id="@+id/bt_remove"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="clickRemoveApp"
+        android:padding="20dp"
+        android:text="一键删除" />
+
+    <Button
+        android:id="@+id/bt_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="clickAddApp"
+        android:padding="20dp"
+        android:text="一键恢复" />
+
+    <!--<EditText-->
+    <!--android:id="@+id/et_cmd"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:background="#abc"-->
+    <!--android:hint="输入命令，点击执行。。。"-->
+    <!--android:padding="10dp" />-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:gravity="center">-->
+
+    <!--&lt;!&ndash;<Button&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_gravity="center"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:onClick="clickExe1"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:text="执行1" />&ndash;&gt;-->
+
+    <!--<Button-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:onClick="clickExe2"-->
+    <!--android:text="执行2" />-->
+
+    <!--</LinearLayout>-->
+
+
+</LinearLayout>
