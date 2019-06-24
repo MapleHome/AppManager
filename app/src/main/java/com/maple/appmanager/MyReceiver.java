@@ -15,6 +15,7 @@ public class MyReceiver extends BroadcastReceiver {
     public MyReceiver() {
     }
 
+
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
@@ -23,4 +24,6 @@ public class MyReceiver extends BroadcastReceiver {
             context.startActivity(i);
         }
     }
+
+
 }

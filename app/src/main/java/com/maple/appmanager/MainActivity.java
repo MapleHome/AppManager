@@ -1,23 +1,31 @@
 package com.maple.appmanager;
 
+import android.content.ComponentName;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.maple.appmanager.utils.SPUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
+    public String AAA = "isStart";
     TextView tvInfo;
     Button btRemove;
     Button btAdd;
-    //    EditText etCMD;
+    CheckBox cbStart;
+    // EditText etCMD;
     boolean canRemove = true;
 
     @Override
@@ -28,14 +36,37 @@ public class MainActivity extends AppCompatActivity {
         tvInfo = findViewById(R.id.tv_info);
         btRemove = findViewById(R.id.bt_remove);
         btAdd = findViewById(R.id.bt_add);
-//         etCMD = findViewById(R.id.et_cmd);
+        // etCMD = findViewById(R.id.et_cmd);
+        cbStart = findViewById(R.id.cb_start_app);
 
         clickRefresh(null);
-
-        Toast.makeText(this, "哈哈，我成功启动了！", Toast.LENGTH_LONG).show();
-        Log.e("AutoRun","哈哈，我成功启动了！");
-
         updateButtonState();
+
+
+        // start other app
+        boolean isStart = new SPUtils().getBoolean(AAA, false);
+        cbStart.setChecked(isStart);
+        if (isStart) {
+            doStartAppWithPackageName("com.example.androidx.viewpager2");
+        }
+
+        cbStart.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                new SPUtils().put(AAA, isChecked);
+            }
+        });
+    }
+
+    private void doStartAppWithPackageName(String packageName) {
+        String className = PackageUtils.getStartActivityName(this, packageName);
+        if (!TextUtils.isEmpty(className)) {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_LAUNCHER);
+            intent.setComponent(new ComponentName(packageName, className));
+            startActivity(intent);
+            finish();
+        }
     }
 
     private void updateButtonState() {
