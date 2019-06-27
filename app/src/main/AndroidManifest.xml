@@ -5,7 +5,8 @@
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.REBOOT" />
+    <!--<uses-permission android:name="android.permission.REBOOT" />-->
+    <!--<uses-permission android:name="android.permission.SHUTDOWN" />-->
 
 
     <application
@@ -17,7 +18,7 @@
         android:sharedUserId="android.uid.system"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,31 +27,30 @@
         </activity>
 
         <receiver
-            android:name=".MyReceiver"
+            android:name=".receiver.MyReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter android:priority="1000">
                 <action android:name="android.intent.action.BOOT_COMPLETED" /> <!--设备启动完成-->
             </intent-filter>
-            <intent-filter android:priority="1000">
-                <action android:name="android.intent.action.ACTION_REBOOT" /> <!--设备重启-->
-            </intent-filter>
-            <intent-filter android:priority="1000">
-                <action android:name="android.intent.action.ACTION_SCREEN_ON" /> <!--屏幕开启-->
-            </intent-filter>
-            <intent-filter android:priority="1000">
-                <action android:name="android.intent.action.ACTION_USER_PRESENT" /> <!--用户唤醒设备-->
-            </intent-filter>
-            <intent-filter> 
-                <action android:name="android.intent.action.ACTION_SHUTDOWN" />
-                <category android:name="android.intent.category.HOME" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.MEDIA_MOUNTED" />
-                <action android:name="android.intent.action.MEDIA_UNMOUNTED" />
-
-                <data android:scheme="file"></data>
-            </intent-filter>
+            <!--<intent-filter android:priority="1000">-->
+            <!--<action android:name="android.intent.action.ACTION_REBOOT" /> &lt;!&ndash;设备重启&ndash;&gt;-->
+            <!--</intent-filter>-->
+            <!--<intent-filter android:priority="1000">-->
+            <!--<action android:name="android.intent.action.ACTION_SCREEN_ON" /> &lt;!&ndash;屏幕开启&ndash;&gt;-->
+            <!--</intent-filter>-->
+            <!--<intent-filter android:priority="1000">-->
+            <!--<action android:name="android.intent.action.ACTION_USER_PRESENT" /> &lt;!&ndash;用户唤醒设备&ndash;&gt;-->
+            <!--</intent-filter>-->
+            <!--<intent-filter> -->
+            <!--<action android:name="android.intent.action.ACTION_SHUTDOWN" />-->
+            <!--<category android:name="android.intent.category.HOME" />-->
+            <!--</intent-filter>-->
+            <!--<intent-filter>-->
+            <!--<action android:name="android.intent.action.MEDIA_MOUNTED" />-->
+            <!--<action android:name="android.intent.action.MEDIA_UNMOUNTED" />-->
+            <!--<data android:scheme="file"></data>-->
+            <!--</intent-filter>-->
         </receiver>
 
     </application>

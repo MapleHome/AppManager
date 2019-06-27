@@ -1,9 +1,10 @@
-package com.maple.appmanager;
+package com.maple.appmanager.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
+import com.maple.appmanager.ui.MainActivity;
 import com.maple.appmanager.utils.SPUtils;
 
 /**
