@@ -80,8 +80,9 @@ public class MainActivity extends AppCompatActivity {
         String info = "系统信息: \n"
                 + "Model: " + android.os.Build.MODEL + ",\n"
                 + "SDK: " + android.os.Build.VERSION.SDK + ",\n"
-                + "版本：" + android.os.Build.VERSION.RELEASE;
-        binding.tvInfo.setText(info);
+                + "版本：" + android.os.Build.VERSION.RELEASE + "\n";
+        String msg = new SPUtils().getString(MyReceiver.BOOT_KEY, "kai");
+        binding.tvInfo.setText(info + msg);
     }
 
 
