@@ -39,15 +39,26 @@ public class MyReceiver extends BroadcastReceiver {
         // 设备启动完成，only one
         if ("android.intent.action.BOOT_COMPLETED".equals(action)) {
             msg += "设备启动完成 ：" + System.currentTimeMillis() + "\n";
+            toMainPage(context, false);
+        }
+        // ACTION_SHUTDOWN
+        if ("android.intent.action.ACTION_SHUTDOWN".equals(action)) {
+            msg += "ACTION_SHUTDOWN ：" + System.currentTimeMillis() + "\n";
+            toMainPage(context, true);
+        }
+        // MEDIA_MOUNTED
+        if ("android.intent.action.MEDIA_MOUNTED".equals(action)) {
+            msg += "MEDIA_MOUNTED ：" + System.currentTimeMillis() + "\n";
         }
         spUtils.put(BOOT_KEY, msg);
-        toMainPage(context);
+
     }
 
-    private void toMainPage(Context context) {
-        Intent i = new Intent(context, MainActivity.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(i);
+    private void toMainPage(Context context, boolean closed) {
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(MainActivity.CLOSED, closed);
+        context.startActivity(intent);
     }
 
 }

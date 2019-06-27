@@ -21,6 +21,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     public static final String START_TAG = "isStart";
+    public static final String CLOSED = "closed";
     private ActivityMainBinding binding;
     private boolean canRemove = true;
 
@@ -35,6 +36,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+
+        boolean closed = getIntent().getBooleanExtra(CLOSED, false);
+        if (closed) {
+            finish();
+        }
 
         clickRefresh(null);
         updateButtonState();
