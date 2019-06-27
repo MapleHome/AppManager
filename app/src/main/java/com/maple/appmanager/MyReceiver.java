@@ -22,15 +22,32 @@ public class MyReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         SPUtils spUtils = new SPUtils();
-        String msg = spUtils.getString(BOOT_KEY, "11");
-        if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
-            msg += "开机广播：" + System.currentTimeMillis() + " \n";
-            spUtils.put(BOOT_KEY, msg);
-
-            Intent i = new Intent(context, MainActivity.class);
-            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(i);
+        String msg = spUtils.getString(BOOT_KEY, "广播日志：\n");
+        String action = intent.getAction();
+        // 设备重启
+        if ("android.intent.action.ACTION_REBOOT".equals(action)) {
+            msg += "设备重启：" + System.currentTimeMillis() + "\n";
         }
+        // 屏幕开启
+        if ("android.intent.action.ACTION_SCREEN_ON".equals(action)) {
+            msg += "屏幕开启：" + System.currentTimeMillis() + "\n";
+        }
+        // 用户唤醒设备
+        if ("android.intent.action.ACTION_USER_PRESENT".equals(action)) {
+            msg += "用户唤醒设备：" + System.currentTimeMillis() + "\n";
+        }
+        // 设备启动完成，only one
+        if ("android.intent.action.BOOT_COMPLETED".equals(action)) {
+            msg += "设备启动完成 ：" + System.currentTimeMillis() + "\n";
+        }
+        spUtils.put(BOOT_KEY, msg);
+        toMainPage(context);
+    }
+
+    private void toMainPage(Context context) {
+        Intent i = new Intent(context, MainActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(i);
     }
 
 }

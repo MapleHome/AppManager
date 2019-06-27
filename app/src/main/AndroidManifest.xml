@@ -28,7 +28,10 @@
             android:enabled="true"
             android:exported="true">
             <intent-filter android:priority="1000">
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.ACTION_REBOOT" /> <!--设备重启-->
+                <action android:name="android.intent.action.ACTION_SCREEN_ON" /> <!--屏幕开启-->
+                <action android:name="android.intent.action.ACTION_USER_PRESENT" /> <!--用户唤醒设备-->
+                <action android:name="android.intent.action.BOOT_COMPLETED" /> <!--设备启动完成-->
             </intent-filter>
         </receiver>
     </application>
