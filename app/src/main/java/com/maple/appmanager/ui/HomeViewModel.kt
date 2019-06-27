@@ -18,7 +18,9 @@ class HomeViewModel : ViewModel() {
         this.value = true
     }
 
-
+    /**
+     * 刷新信息
+     */
     fun clickRefresh() {
         val infoStr = ("系统信息: \n"
                 + "Model: " + android.os.Build.MODEL + ",\n"
@@ -28,13 +30,17 @@ class HomeViewModel : ViewModel() {
         showInfo.value = infoStr + msg
     }
 
-
-    fun moveToSystem(appName: String) {
-        val cmdList = ArrayList<String>()
-        cmdList.add("su")//root权限
-        cmdList.add("mount -o rw,remount /system")//获取system权限
-        cmdList.add("cp -r /storage/external_storage/sda1/$appName.apk /system/app/$appName.apk")
-        cmdList.add("chmod 777 /system/app/a234.apk")
+    /**
+     * 移动到System目录，将普通app变为系统app
+     */
+    fun moveToSystem(appName: String, appName2: String) {
+        val cmdList = arrayListOf(
+                "su",
+                "mount -o rw,remount /system",
+                "cp -r /storage/external_storage/sda1/$appName.apk /system/app/$appName.apk",
+                "chmod 777 /system/app/$appName.apk",
+                "pm install /storage/external_storage/sda1/$appName2.apk"
+        )
         exeCommands(cmdList).apply {
             if (this) {
                 showToast("移动 $appName 成功！")
@@ -42,10 +48,11 @@ class HomeViewModel : ViewModel() {
                 showToast("移动 $appName 失败！")
             }
         }
-        canRemove.value = true
     }
 
-
+    /**
+     * 一键安装多个应用
+     */
     fun addSingleApp(appNames: ArrayList<String>) {
         val cmdList = ArrayList<String>()
         cmdList.add("su")//root权限
@@ -63,6 +70,9 @@ class HomeViewModel : ViewModel() {
         canRemove.value = true
     }
 
+    /**
+     * 一键删除
+     */
     fun removeSingleApp(appNames: ArrayList<String>) {
         val cmdList = ArrayList<String>()
         cmdList.add("su")//root权限
@@ -81,6 +91,9 @@ class HomeViewModel : ViewModel() {
     }
 
 
+    /**
+     * 执行CMD命令
+     */
     private fun exeCommands(commands: List<String>): Boolean {
         var log = ""
         var retAll = true
@@ -90,14 +103,6 @@ class HomeViewModel : ViewModel() {
             for (cmd in commands) {
                 val r = vt.runCommand(cmd)
                 val removeSingle = r.success()
-                //                if (cmd.startsWith("mv")) {
-                //                    String appName = cmd.substring(cmd.indexOf("app") + 4, cmd.indexOf(".apk"));
-                //                    if (removeSingle) {
-                //                        showToast(ss + appName + "成功！");
-                //                    } else {
-                //                        showToast(ss + appName + "失败！");
-                //                    }
-                //                }
                 log += "$cmd   执行成功? $removeSingle! \n"
                 retAll = retAll && removeSingle
             }

@@ -57,9 +57,15 @@ class HomeFragment : BaseFragment() {
 
         // init Listener
         binding.apply {
-            btRemove.setOnClickListener { mViewModel.removeSingleApp(appNames) }
-            btAdd.setOnClickListener { mViewModel.addSingleApp(appNames) }
-            btMove.setOnClickListener { mViewModel.moveToSystem("") }
+            btRemove.setOnClickListener {
+                mViewModel.removeSingleApp(appNames)
+            }
+            btAdd.setOnClickListener {
+                mViewModel.addSingleApp(appNames)
+            }
+            btMove.setOnClickListener {
+                mViewModel.moveToSystem("AppStarter_v1", "dangbeimarket419znds")
+            }
             cbStartApp.setOnCheckedChangeListener { _, isChecked ->
                 SPUtils().put(START_TAG, isChecked)
             }
