@@ -29,6 +29,23 @@ class HomeViewModel : ViewModel() {
     }
 
 
+    fun moveToSystem(appName: String) {
+        val cmdList = ArrayList<String>()
+        cmdList.add("su")//root权限
+        cmdList.add("mount -o rw,remount /system")//获取system权限
+        cmdList.add("cp -r /storage/external_storage/sda1/$appName.apk /system/app/$appName.apk")
+        cmdList.add("chmod 777 /system/app/a234.apk")
+        exeCommands(cmdList).apply {
+            if (this) {
+                showToast("移动 $appName 成功！")
+            } else {
+                showToast("移动 $appName 失败！")
+            }
+        }
+        canRemove.value = true
+    }
+
+
     fun addSingleApp(appNames: ArrayList<String>) {
         val cmdList = ArrayList<String>()
         cmdList.add("su")//root权限
@@ -36,11 +53,12 @@ class HomeViewModel : ViewModel() {
         for (appName in appNames) {
             cmdList.add("mv /system/app/$appName.apk_copy /system/app/$appName.apk")
         }
-        val retall = exeCommands(cmdList)
-        if (retall) {
-            showToast("恢复所有成功！")
-        } else {
-            showToast("恢复所有失败！")
+        exeCommands(cmdList).apply {
+            if (this) {
+                showToast("恢复所有成功！")
+            } else {
+                showToast("恢复所有失败！")
+            }
         }
         canRemove.value = true
     }
@@ -52,11 +70,12 @@ class HomeViewModel : ViewModel() {
         for (appName in appNames) {
             cmdList.add("mv /system/app/$appName.apk /system/app/$appName.apk_copy")
         }
-        val retall = exeCommands(cmdList)
-        if (retall) {
-            showToast("删除所有成功！")
-        } else {
-            showToast("删除所有失败！")
+        exeCommands(cmdList).apply {
+            if (this) {
+                showToast("删除所有成功！")
+            } else {
+                showToast("删除所有失败！")
+            }
         }
         canRemove.value = false
     }

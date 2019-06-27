@@ -28,6 +28,13 @@
             android:padding="20dp"
             android:text="一键恢复" />
 
+        <Button
+            android:id="@+id/bt_move"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:text="移动到System" />
+
         <CheckBox
             android:id="@+id/cb_start_app"
             android:layout_width="match_parent"
