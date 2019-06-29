@@ -1,7 +1,6 @@
 package com.maple.appmanager.ui
 
 import android.content.pm.PackageManager
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.maple.appmanager.data.App
@@ -43,9 +42,9 @@ class HomeViewModel : ViewModel() {
     fun getInstallAppList(pm: PackageManager) {
         appDatas.value = pm.getInstalledPackages(0)
                 .filter {
-                    Log.e("app info", "$it")
-                    !(it.packageName.startsWith("com.android") ||
-                            it.packageName.startsWith("com.google"))
+                    it.packageName.contains("Le") ||
+                            it.packageName.contains("Stv") ||
+                            it.packageName.contains("maple")
                 }
                 .map {
                     val logo = it.applicationInfo.loadIcon(pm)

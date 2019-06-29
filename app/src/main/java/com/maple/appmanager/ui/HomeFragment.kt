@@ -48,9 +48,11 @@ class HomeFragment : BaseFragment() {
             }
             btRemove.setOnClickListener {
                 mViewModel.removeSingleApp()
+                mViewModel.getInstallAppList(mContext.packageManager)
             }
             btAdd.setOnClickListener {
                 mViewModel.addSingleApp()
+                mViewModel.getInstallAppList(mContext.packageManager)
             }
             rvApp.adapter = appListAdapter
         }
