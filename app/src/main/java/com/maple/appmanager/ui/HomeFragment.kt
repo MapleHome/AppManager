@@ -21,12 +21,6 @@ class HomeFragment : BaseFragment() {
         ViewModelProviders.of(this).get(HomeViewModel::class.java)
     }
 
-    companion object {
-        // Config info
-        val appNames = arrayListOf("LeSo", "LeSports", "LeStore", "LeVideo", "StvGallery", "StvWeather")
-        // const val startAppID = "com.example.androidx.viewpager2"
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         binding.lifecycleOwner = this
@@ -41,18 +35,18 @@ class HomeFragment : BaseFragment() {
 
     private fun initView() {
         // binding.btAdd
-        mViewModel.clickRefresh()
+        mViewModel.refreshInfo()
 
         // init Listener
         binding.apply {
             btRemove.setOnClickListener {
-                mViewModel.removeSingleApp(appNames)
+                mViewModel.removeSingleApp()
             }
             btAdd.setOnClickListener {
-                mViewModel.addSingleApp(appNames)
+                mViewModel.addSingleApp()
             }
             btMove.setOnClickListener {
-                mViewModel.moveToSystem("AppStarter_v1", "dangbeimarket419znds")
+                mViewModel.moveToSystem()
             }
         }
     }

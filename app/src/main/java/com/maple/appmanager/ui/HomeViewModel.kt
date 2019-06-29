@@ -16,10 +16,18 @@ class HomeViewModel : ViewModel() {
         this.value = true
     }
 
+    companion object {
+        // Config info
+        val appNames = arrayListOf("LeSo", "LeSports", "LeStore", "LeVideo", "StvGallery", "StvWeather")
+        // const val startAppID = "com.example.androidx.viewpager2"
+        const val app1Name = "AppStarter_v1"
+        const val app2Name = "dangbeimarket419znds"
+    }
+
     /**
      * 刷新信息
      */
-    fun clickRefresh() {
+    fun refreshInfo() {
         val infoStr = ("系统信息: \n"
                 + "Model: " + android.os.Build.MODEL + ",\n"
                 + "SDK: " + android.os.Build.VERSION.SDK + ",\n"
@@ -31,7 +39,7 @@ class HomeViewModel : ViewModel() {
     /**
      * 移动到System目录，将普通app变为系统app
      */
-    fun moveToSystem(appName: String, appName2: String) {
+    fun moveToSystem(appName: String = app1Name, appName2: String = app2Name) {
         val cmdList = arrayListOf(
                 "su",
                 "mount -o rw,remount /system",
@@ -51,7 +59,7 @@ class HomeViewModel : ViewModel() {
     /**
      * 一键安装多个应用
      */
-    fun addSingleApp(appNames: ArrayList<String>) {
+    fun addSingleApp() {
         val cmdList = ArrayList<String>()
         cmdList.add("su")//root权限
         cmdList.add("mount -o rw,remount /system")//获取system权限
@@ -71,7 +79,7 @@ class HomeViewModel : ViewModel() {
     /**
      * 一键删除
      */
-    fun removeSingleApp(appNames: ArrayList<String>) {
+    fun removeSingleApp() {
         val cmdList = ArrayList<String>()
         cmdList.add("su")//root权限
         cmdList.add("mount -o rw,remount /system")//获取system权限
