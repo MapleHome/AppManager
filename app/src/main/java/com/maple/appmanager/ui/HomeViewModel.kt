@@ -1,7 +1,10 @@
 package com.maple.appmanager.ui
 
+import android.content.pm.PackageManager
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.maple.appmanager.data.App
 import com.maple.appmanager.utils.VirtualTerminal
 import java.util.*
 
@@ -12,9 +15,8 @@ import java.util.*
  */
 class HomeViewModel : ViewModel() {
     val showInfo = MutableLiveData<String>()
-    val canRemove = MutableLiveData<Boolean>().apply {
-        this.value = true
-    }
+    val canRemove = MutableLiveData(true)
+    val appDatas = MutableLiveData<List<App>>()
 
     companion object {
         // Config info
@@ -32,8 +34,26 @@ class HomeViewModel : ViewModel() {
                 + "Model: " + android.os.Build.MODEL + ",\n"
                 + "SDK: " + android.os.Build.VERSION.SDK + ",\n"
                 + "版本：" + android.os.Build.VERSION.RELEASE + "\n")
-        // val msg = SPUtils().getString(MyReceiver.BOOT_KEY, "kai")
-        showInfo.value = infoStr // + msg
+        showInfo.value = infoStr
+    }
+
+    /**
+     * 获取已经安装的app列表
+     */
+    fun getInstallAppList(pm: PackageManager) {
+        appDatas.value = pm.getInstalledPackages(0)
+                .filter {
+                    Log.e("app info", "$it")
+                    !(it.packageName.startsWith("com.android") ||
+                            it.packageName.startsWith("com.google"))
+                }
+                .map {
+                    val logo = it.applicationInfo.loadIcon(pm)
+                    val appName = it.applicationInfo.loadLabel(pm).toString()
+                    val version = "V ${it.versionName} - build ${it.versionCode}"
+                    val packageName = it.packageName
+                    App(logo, appName, version, packageName)
+                }
     }
 
     /**

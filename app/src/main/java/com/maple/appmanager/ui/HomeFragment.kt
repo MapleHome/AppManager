@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.maple.appmanager.R
 import com.maple.appmanager.databinding.FragmentHomeBinding
@@ -17,6 +18,7 @@ import com.maple.appmanager.ui.base.BaseFragment
  */
 class HomeFragment : BaseFragment() {
     private lateinit var binding: FragmentHomeBinding
+    private val appListAdapter by lazy { AppListAdapter() }
     private val mViewModel by lazy {
         ViewModelProviders.of(this).get(HomeViewModel::class.java)
     }
@@ -34,32 +36,38 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun initView() {
-        // binding.btAdd
-        mViewModel.refreshInfo()
+        mViewModel.apply {
+            refreshInfo()
+            getInstallAppList(mContext.packageManager)
+        }
 
         // init Listener
         binding.apply {
+            btMove.setOnClickListener {
+                mViewModel.moveToSystem()
+            }
             btRemove.setOnClickListener {
                 mViewModel.removeSingleApp()
             }
             btAdd.setOnClickListener {
                 mViewModel.addSingleApp()
             }
-            btMove.setOnClickListener {
-                mViewModel.moveToSystem()
-            }
+            rvApp.adapter = appListAdapter
         }
     }
 
     private fun subscribeUI() {
         // subscribe UI
         mViewModel.apply {
-            canRemove.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            canRemove.observe(viewLifecycleOwner, Observer {
                 binding.btRemove.isEnabled = it
                 binding.btAdd.isEnabled = !it
             })
-            showInfo.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            showInfo.observe(viewLifecycleOwner, Observer {
                 binding.tvInfo.text = it
+            })
+            appDatas.observe(viewLifecycleOwner, Observer {
+                appListAdapter.submitList(it)
             })
         }
     }
