@@ -1,9 +1,6 @@
 package com.maple.appmanager.ui
 
-import android.content.ComponentName
-import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +9,6 @@ import androidx.lifecycle.ViewModelProviders
 import com.maple.appmanager.R
 import com.maple.appmanager.databinding.FragmentHomeBinding
 import com.maple.appmanager.ui.base.BaseFragment
-import com.maple.appmanager.utils.PackageUtils
-import com.maple.appmanager.utils.SPUtils
 
 /**
  *
@@ -21,16 +16,15 @@ import com.maple.appmanager.utils.SPUtils
  * @time 2019-06-27
  */
 class HomeFragment : BaseFragment() {
-    lateinit var binding: FragmentHomeBinding
+    private lateinit var binding: FragmentHomeBinding
     private val mViewModel by lazy {
         ViewModelProviders.of(this).get(HomeViewModel::class.java)
     }
 
     companion object {
-        const val START_TAG = "isStart"
         // Config info
         val appNames = arrayListOf("LeSo", "LeSports", "LeStore", "LeVideo", "StvGallery", "StvWeather")
-        const val startAppID = "com.example.androidx.viewpager2"
+        // const val startAppID = "com.example.androidx.viewpager2"
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -48,12 +42,6 @@ class HomeFragment : BaseFragment() {
     private fun initView() {
         // binding.btAdd
         mViewModel.clickRefresh()
-        // start other app
-        val isStart = SPUtils().getBoolean(START_TAG, false)
-        binding.cbStartApp.isChecked = isStart
-        if (isStart) {
-            doStartAppWithPackageName(startAppID)
-        }
 
         // init Listener
         binding.apply {
@@ -65,9 +53,6 @@ class HomeFragment : BaseFragment() {
             }
             btMove.setOnClickListener {
                 mViewModel.moveToSystem("AppStarter_v1", "dangbeimarket419znds")
-            }
-            cbStartApp.setOnCheckedChangeListener { _, isChecked ->
-                SPUtils().put(START_TAG, isChecked)
             }
         }
     }
@@ -82,17 +67,6 @@ class HomeFragment : BaseFragment() {
             showInfo.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
                 binding.tvInfo.text = it
             })
-        }
-    }
-
-    private fun doStartAppWithPackageName(packageName: String) {
-        val className = PackageUtils.getStartActivityName(mContext, packageName)
-        if (!TextUtils.isEmpty(className)) {
-            val intent = Intent(Intent.ACTION_MAIN)
-            intent.addCategory(Intent.CATEGORY_LAUNCHER)
-            intent.component = ComponentName(packageName, className!!)
-            startActivity(intent)
-            // finish();
         }
     }
 }

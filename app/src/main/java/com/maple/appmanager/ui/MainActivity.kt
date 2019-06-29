@@ -9,20 +9,12 @@ import com.maple.appmanager.ui.base.BaseFragmentActivity
  * @time 2019-06-27
  */
 class MainActivity : BaseFragmentActivity() {
-    companion object {
-        const val CLOSED = "closed"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         addView(HomeFragment())
-
-        val closed = intent.getBooleanExtra(CLOSED, false)
-        if (closed) {
-            finish()
-        }
     }
 
 }

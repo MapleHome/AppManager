@@ -2,8 +2,6 @@ package com.maple.appmanager.ui
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.maple.appmanager.receiver.MyReceiver
-import com.maple.appmanager.utils.SPUtils
 import com.maple.appmanager.utils.VirtualTerminal
 import java.util.*
 
@@ -26,8 +24,8 @@ class HomeViewModel : ViewModel() {
                 + "Model: " + android.os.Build.MODEL + ",\n"
                 + "SDK: " + android.os.Build.VERSION.SDK + ",\n"
                 + "版本：" + android.os.Build.VERSION.RELEASE + "\n")
-        val msg = SPUtils().getString(MyReceiver.BOOT_KEY, "kai")
-        showInfo.value = infoStr + msg
+        // val msg = SPUtils().getString(MyReceiver.BOOT_KEY, "kai")
+        showInfo.value = infoStr // + msg
     }
 
     /**

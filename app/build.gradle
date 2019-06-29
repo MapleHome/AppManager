@@ -8,7 +8,7 @@ android {
         applicationId "com.maple.appmanager"
         minSdkVersion 17
         targetSdkVersion 28
-        versionCode 3
+        versionCode 4
         versionName "1.0"
     }
     buildTypes {
@@ -17,6 +17,20 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+//    signingConfigs {
+//        debug {
+//            storeFile file("../../aware.keystore")
+//            storePassword "123456"
+//            keyAlias "maple"
+//            keyPassword "123456"
+//        }
+//        release {
+//            storeFile file("../../aware.keystore")
+//            storePassword "123456"
+//            keyAlias "maple"
+//            keyPassword "123456"
+//        }
+//    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
