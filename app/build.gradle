@@ -17,20 +17,20 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-//    signingConfigs {
-//        debug {
-//            storeFile file("../../aware.keystore")
-//            storePassword "123456"
-//            keyAlias "maple"
-//            keyPassword "123456"
-//        }
-//        release {
-//            storeFile file("../../aware.keystore")
-//            storePassword "123456"
-//            keyAlias "maple"
-//            keyPassword "123456"
-//        }
-//    }
+    signingConfigs {
+        debug {
+            storeFile file("../../maple.jks")
+            storePassword "123456"
+            keyAlias "maple"
+            keyPassword "123456"
+        }
+        release {
+            storeFile file("../../maple.jks")
+            storePassword "123456"
+            keyAlias "maple"
+            keyPassword "123456"
+        }
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
